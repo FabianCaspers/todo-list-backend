@@ -7,10 +7,11 @@ from rest_framework import authentication, permissions
 from django.contrib.auth.models import User
 from todolist.models import TodoItem
 from todolist.serializers import TodoItemSerializer
+from rest_framework.permissions import IsAuthenticated
 
 class TodoItemView(APIView):
-    # authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = []
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         todos = TodoItem.objects.all()
